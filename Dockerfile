@@ -21,6 +21,13 @@ RUN \
     libatomic1 \
     nano \
     net-tools \
+    wget \ 
+    gcc \
+    nodejs \
+    npm \
+    build-essential \
+    curl \
+    java-common \
     sudo && \
   echo "**** install code-server ****" && \
   if [ -z ${CODE_RELEASE+x} ]; then \
@@ -40,7 +47,11 @@ RUN \
     /config/* \
     /tmp/* \
     /var/lib/apt/lists/* \
-    /var/tmp/*
+    /var/tmp/* && \
+    wget https://corretto.aws/downloads/latest/amazon-corretto-21-x64-linux-jdk.deb && \
+    dpkg -i amazon-corretto-21-x64-linux-jdk.deb && \
+    curl -fsSL https://get.docker.com -o install-docker.sh && \
+    sh install-docker.sh
 
 # add local files
 COPY /root /
